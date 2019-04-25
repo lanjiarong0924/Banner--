@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>无缝滚动</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+            
+        }
+       #div1{
+           width: 712px;
+           height: 108px;
+           margin: 100px auto;
+           position: relative;
+           overflow: hidden;
+           
+       }
+        #div1 ul{
+            position: absolute;
+            left: 0;
+            top: 0;
+            /* overflow: hidden; */
+        }
+        #div1 ul li{
+            float: left;
+            width: 178px;
+            height: 108px;
+            list-style: none;
+            /* overflow: hidden; */
+        }
+        #div1 ul li img{
+          width: 178px;
+          height: 108px;
+        }
+        .a1{    
+            position: relative;
+            left: 200px;
+            top: 150px;
+            border: 1px solid black;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            
+        }
+        .a2 {
+    position: relative;
+    /* right: -29px; */
+    left: 1046px;
+    top: 155px;
+    border: 1px solid black;
+            border-radius: 50%;
+        }
+
+    </style>
+</head>
+<body>
+    <a class="a1" href="javascript:;">向左走</a>
+    <a class="a2" href="javascript:;">向右走</a>
+    <div id="div1">
+  <ul>
+      <li><img src="https://m.360buyimg.com/babel/jfs/t1/16367/29/3140/101322/5c24953eE3615e42b/d9f949ed9d1af604.jpg"
+        alt=""></li>
+      <li><img src="https://img1.360buyimg.com/pop/jfs/t1/19967/14/3531/102982/5c276d46Ee0ca98b7/54e17a557e29ff01.jpg" alt=""></li>
+      <li><img src="https://img11.360buyimg.com/da/jfs/t16663/131/1424030023/110119/f5bc9082/5acb3b19Nc3efd8d0.jpg" alt=""></li>
+      <li><img src="https://img1.360buyimg.com/pop/jfs/t1/23986/19/3155/82711/5c2491a4E6d9e197c/f0142ea62a87c479.jpg" alt=""></li>
+  </ul>
+</div>
+</body>
+<script>
+    var  oDiv=document.getElementById('div1');
+    var oUl=document.getElementsByTagName('ul')[0];
+    var aLi=document.getElementsByTagName('li');
+var timer=null;
+var speed=-2;
+    oUl.innerHTML=oUl.innerHTML+oUl.innerHTML;
+    oUl.style.width=aLi[0].offsetWidth*aLi.length+'px'
+    function move(){
+        // 向左
+        if(oUl.offsetLeft<-oUl.offsetWidth/2){
+            oUl.style.left='0'
+        }
+        // 向右
+        if(oUl.offsetLeft>0){
+            oUl.style.left=-oUl.offsetWidth/2+'px'
+        }
+        oUl.style.left=oUl.offsetLeft+speed+'px'
+    }
+   timer=setInterval(move,30)
+    oDiv.addEventListener('mouseover',function(){
+        fn2()
+    })
+    function fn2(){
+        clearInterval(timer)
+    }
+    oDiv.addEventListener('mouseout',function(){
+        fn3()
+    })
+    function fn3(){
+        timer=setInterval(move,30)
+    }
+    document.getElementsByTagName('a')[0].onclick=function(){
+        speed=-2;
+    }
+    document.getElementsByTagName('a')[1].onclick=function(){
+        speed=2;
+    }
+</script>
+</html>
